@@ -1,0 +1,38 @@
+body {margin:0; padding: 0; font-family: Arial;}
+body input, body textarea {border:1px solid #ccc; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; margin:5px; padding: 5px;}
+h1 {color:#369; margin:20px;}
+#contenido {width: 98%; height: 30px; background: #369; padding:1% !important;  color:fff;}
+#contenido #post {margin-left: 20px !important;}
+#contenido p {float:left; margin: 5px; color:#fff; font-size: 12px;  }
+#contenido p a {display: inline-block; color:#fff; padding: 0 5px; text-decoration: none; border-bottom: 1px dashed #fff;}
+#contenido p a:hover {color:#ccc;  border-bottom: 1px dashed #ccc;}
+.a2a_kit   {background: #fff; float: right; padding: 5px; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
+.a2a_kit a {color:#369;}
+iframe  {background:rgba(255,255,255,0.7); }
+#footer {
+    background: none repeat scroll 0 0 #F7F7F7;
+    border-top: 1px solid #E7E7E7;
+    float: left;
+    height: 60px;
+    width: 100%;
+}
+#footer #contfooter a {
+    color: #336699;
+}
+#footer #contfooter {
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 1150px;
+}
+.txtfx {
+    text-shadow: 0 1px 1px #FFFFFF;
+}
+#footer #contfooter p {
+    float: left;
+    font-size: 11px;
+    width: 400px;}
+#footer #contfooter p#social {
+    text-align: right;
+    float:right;
+    width: 275px !important;
+}

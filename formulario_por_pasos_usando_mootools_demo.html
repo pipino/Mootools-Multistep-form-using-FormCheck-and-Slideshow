@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/frame.css?12" type="text/css" media="screen" />
+        <link rel="stylesheet" href="js/formcheck/theme/classic/formcheck.css" type="text/css" media="screen" />
+        <script src="js/mootools-1.2.5-core-yc.js" type="text/javascript"></script>
+        <script src="js/mootools-1.2.5.1-more.js" type="text/javascript"></script>
+        <script src="js/formcheck/lang/es.js" type="text/javascript"></script>
+        <script src="js/formcheck/formcheck.js" type="text/javascript"></script>
+        <script src="js/slideshow/Loop.js" type="text/javascript"></script>
+        <script src="js/slideshow/SlideShow.js" type="text/javascript"></script>
+        <title>Demo: Formulario por pasos usando Mootools.</title>
+</head>
+<style type="text/css" media="screen">
+  div#contenedor {
+    margin: 20px;
+    height: 500px;
+    width: 550px;
+    overflow: hidden;
+  }
+  div#contenedor div {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+</style>
+<script>
+  window.addEvent('domready', function(){
+    var slideshow = new SlideShow('contenedor');
+
+    new FormCheck('form_1', {
+      submit: false,
+      onValidateSuccess: function () {
+        slideshow.show($('etapa_2'), {
+          transition: 'pushLeft'
+        });
+      }
+    });
+
+    new FormCheck('form_2', {
+      submit: false,
+      onValidateSuccess: function () {
+        slideshow.show($('etapa_3'), {
+          transition: 'pushLeft'
+        });
+      }
+    });
+    new FormCheck('form_3', {
+      submit: false,
+      onValidateSuccess: function () {
+        var datos = $('form_1').toQueryString() + '&' + $('form_2').toQueryString() + '&' + $('form_3').toQueryString();
+        new Request({
+          url: 'action/ajax_echo.php',
+          data: datos,
+          onSuccess: function (result) {
+            alert(result);
+          }
+        }).send();
+      }
+    });
+    
+    $('atras_2').addEvent('click', function(ev){
+      ev.stop();
+      slideshow.show($('etapa_1'), {
+        transition: 'pushRight'
+      });
+    });
+    $('atras_3').addEvent('click', function(ev){
+      ev.stop();
+      slideshow.show($('etapa_2'), {
+        transition: 'pushRight'
+      });
+    });
+  });
+</script>
+<body>
+  <h1>Demo: Formulario por pasos usando Mootools.</h1>
+  <div id='contenedor'>
+    <div id='etapa_1'>
+      <h4>Paso 1</h4>
+      <form id='form_1' action='#'>
+        <label for="nombre">
+          Nombre<br />
+          <input name="nombre" id="nombre" type="text" class="validate['required','alpha']" />
+        </label>
+        <br />
+        <label for="apellidos">
+          Apellidos<br />
+          <input name="apellidos" id="apellidos" type="text" class="validate['required','alpha']" />
+        </label>
+        <br />
+        <input type="submit" value="Continuar" />
+      </form>
+    </div>
+    <div id='etapa_2'>
+      <h4>Paso 2</h4>
+      <form id='form_2' action='#'>
+        <label for="password">
+          Contraseña<br />
+          <input name="password" id="password" type="password" class="validate['required']" />
+        </label>
+        <br />
+        <label for="rep_password">
+          Repita Contraseña<br />
+          <input name="rep_password" id="rep_password" type="password" class="validate['confirm:password']" />
+        </label>
+        <br />
+        <label for="telefono">
+          Teléfono<br />
+          <input name="telefono" id="telefono" type="telefono" class="validate['required','phone']" />
+        </label>
+        <br />
+        <input type="submit" value="Continuar" />
+      </form>
+      <a href="#" id="atras_2">&DownLeftVector; atrás</a>
+    </div>
+    <div id='etapa_3'>
+      <h4>Paso 3 (final)</h4>
+      <form id='form_3' action='#'>
+        <label for="email">
+          E-mail<br />
+          <input name="email" id="email" type="text" class="validate['required','email']" />
+        </label>
+        <br />
+        <label for="comentario">
+          Comentario<br />
+          <textarea id="comentario" name="comentario" cols="50" rows="15"></textarea>
+        </label>
+        <br />
+        <input type="submit" value="Enviar" />
+      </form>
+      <a href="#" id="atras_3">&DownLeftVector; atrás</a>
+    </div>
+  </div>
+</body>
+</html>
